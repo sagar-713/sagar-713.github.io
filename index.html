@@ -21,6 +21,20 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<!-- Leaflet Map Library -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<!-- Leaflet Draw Plugin -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+<!-- Leaflet Control Geocoder (Search Bar) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+	
+
 
 
 
@@ -186,7 +200,7 @@
 
 						<br>
 						<br>
-			            <h2>A Stock Market Trader</h2>
+			            <h2>Engineer</h2>
 						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
 						<!-- <br> -->
 			            <p><a href="https://www.youtube.com/@sagarupadhaya713" class="btn btn-primary py-3 px-4">YouTube</a> 
@@ -385,14 +399,28 @@
 
 
     <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
+     <div class="container">
+    	<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
             <h1 class="big big-2">Contact</h1>
             <h2 class="mb-4">Contact Me</h2>
             <p>Below are the details to reach out to me!</p>
           </div>
         </div>
+		<!-- Spatial Map Section -->
+	<section class="ftco-section contact-section" id="map-section">
+  	 <div class="container">
+    	<div class="row justify-content-center mb-5">
+      	 <div class="col-md-8 heading-section text-center">
+          <h2 class="mb-4">Spatial Map Tool</h2>
+          <p>Explore the interactive map of Nepal below.</p>
+         </div>
+        </div>
+    <div id="mymap" style="height: 500px; border: 2px solid #ccc;"></div>
+  </div>
+</section>
+
+	
 
         <div class="row d-flex contact-info mb-5">
           <div class="col-md-6 col-lg-3 d-flex ftco-animate">
@@ -490,4 +518,71 @@
   <script src="js/main.js"></script>
     
   </body>
+  <script>
+  // Initialize map
+  var map = L.map('mymap').setView([28.3949, 84.1240], 7);
+
+  // Base map layer
+  var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Additional basemap (satellite)
+  var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+    'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+  });
+
+  // Add Layer Control
+  var baseMaps = {
+    "OpenStreetMap": osm,
+    "Satellite": satellite
+  };
+  L.control.layers(baseMaps).addTo(map);
+
+  // Add marker
+  var ktm = L.marker([27.7172, 85.3240]).bindPopup("<b>Kathmandu</b>");
+  ktm.addTo(map);
+
+  // Add GeoJSON data (Optional: replace with your real data)
+  var geojsonLayer = L.geoJSON(null, {
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup("District: " + feature.properties.name);
+    }
+  }).addTo(map);
+
+  // Example GeoJSON (sample polygon)
+  var geojsonSample = {
+    "type": "FeatureCollection",
+    "features": [{
+      "type": "Feature",
+      "properties": {"name": "Example District"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[84.0, 28.5], [84.5, 28.5], [84.5, 29.0], [84.0, 29.0], [84.0, 28.5]]]
+      }
+    }]
+  };
+  geojsonLayer.addData(geojsonSample);
+
+  // Add Drawing Controls
+  var drawnItems = new L.FeatureGroup();
+  map.addLayer(drawnItems);
+  var drawControl = new L.Control.Draw({
+    edit: {
+      featureGroup: drawnItems
+    }
+  });
+  map.addControl(drawControl);
+
+  map.on(L.Draw.Event.CREATED, function (event) {
+    var layer = event.layer;
+    drawnItems.addLayer(layer);
+  });
+
+  // Add Geocoder Search Bar
+  L.Control.geocoder().addTo(map);
+</script>
+
+
 </html>
