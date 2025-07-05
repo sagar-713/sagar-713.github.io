@@ -31,18 +31,44 @@
 <!-- Leaflet Control Geocoder (Search Bar) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!-- Leaflet Draw CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+<!-- Leaflet Control Layers -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
-
-	
-
-
+<style>
+  #map {
+    height: 90vh;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  .custom-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px #999;
+    cursor: pointer;
+  }
+</style>
 
 
 <style>
 
+
+
 /*======================================
+
 //--//-->   ABOUT
 ======================================*/
+
 
 .about-mf .box-shadow-full {
   padding-top: 4rem;
@@ -314,7 +340,7 @@
           <div class="col-md-10 heading-section text-center ftco-animate">
           	<h1 class="big big-2">Resume</h1>
             <h2 class="mb-4">Resume</h2>
-            <p>Seasoned Senior Technical Data Analyst with 5+ years of experience driving business strategies through data-driven insights in stock Market . Proven expertise in data science, Technical analysis, learning algorithms and project management.</p>
+            <p>Seasoned  Technical Data Analyst with 5+ years of experience driving business strategies through data-driven insights in stock Market . Proven expertise in data science, Technical analysis, learning algorithms and project management.</p>
           </div>
         </div>
 
@@ -328,13 +354,15 @@
 				<div class="col-md-6">
 					<div class="resume-wrap ftco-animate">
 						<span class="date">2021-Present</span>
-						<h2>Senior Technical Data Analyst</h2>
-						<span class="position">Nepse Trading</span>
-						<p class="mt-4">Nepse Trading, a leading Stock market and media company with over 10K+ professionals nationally. It's a part of 'SMAARC'. 
+						<h2>GEOMATICS ENGINEERING</h2>
+						<span class="position">SURVEYING</span>
+						<p class="mt-4">My Experience in the Field of Geomatics Engineering. 
 							<ul>
-								<li>Analysed ad campaigns, clickstream, and customer surveys data, identified an increasing demand and launched a strategic product line.</li>
-								<li>Developed time series forecasting models to predict sell and optimize marketing budgets, got model performance of 92%.</li>
-								<li>Designed and executed TA tests, performed rigorous Technoical analysis. Led to 20% ROI increase in the dividend rate.</li>
+								<li>Field Surveys: Conducted topographic, cadastral, and engineering surveys using total stations, GPS, drones, and traditional methods.</li>
+								<li>Remote Sensing Projects: Worked on satellite image classification, land use/land cover mapping, and change detection using software like ERDAS and ENVI.</li>
+								<li>GIS Analysis: Created spatial databases, performed spatial analysis, and developed interactive maps using QGIS, ArcGIS, and Python-based libraries.</li>
+								<li>Web Mapping: Developed interactive web-based spatial tools using Leaflet and GeoJSON for public engagement and visualization.</li>
+								<li>Drone Mapping: Hands-on experience with UAV-based photogrammetry and 3D model generation using Pix4D and DJI tools.</li>
 							</ul>
 						</p>
 					</div>
@@ -344,13 +372,15 @@
 				<div class="col-md-6">
 					<div class="resume-wrap ftco-animate">
 						<span class="date">2019-2021</span>
-						<h2>Data Analyst</h2>
-						<span class="position">Sumeru Securities</span>
-						<p class="mt-4">Sumeru Securities is a stock brokrage and stock marketing analytics and solutions company. 
+						<h2>ANALYST</h2>
+						<span class="position">ENGINEERING</span>
+						<p class="mt-4">My Experience in Programming & Hydropower Projects 
 							<ul>
-								<li>Performed in-depth market research and analysis to create online platform. Resulted in ~100% website growth and 30% increase in conversion rate YoY.</li>
-								<li>Delivered multiple training and mentorship sessions on analytical tools like SQL, MS Excel, and Python.</li>
-								<li>Performed migration and enhancements for merchandising dashboard, involved data integration and its feature improvement.</li>
+								<li>Strong Programming Background: Proficient in Python, JavaScript, HTML/CSS, and Bash scripting with applications in geospatial analysis, data processing, and software development.</li>
+								<li>Machine Learning & Data Science: Worked on classification models (KMeans, ISODATA, LSTM) for spatial and temporal data analysis, including stock market trends and land cover classification.</li>
+				
+								<li>Integration of GIS with Power Planning: Mapped river networks, settlements, and infrastructure proximity to evaluate power distribution feasibility in remote areas.</li>
+								<li>Survey & Mapping for Hydropower: Assisted in topographic surveys, alignment mapping, and preliminary designs using AutoCAD Civil 3D, QGIS, and GNSS-based data collection.</li>
 							</ul>
 						</p>
 					</div>
@@ -389,16 +419,25 @@
 
     		<div class="row justify-content-center mt-5">
     			<div class="col-md-6 text-center ftco-animate">
-    				<p><a href="#" class="btn btn-primary py-4 px-5">Download CV</a></p>
+    				<p><a href="" class="btn btn-primary py-4 px-5">Download CV</a></p>
     			</div>
     		</div>
     	</div>
     </section>
+	
+	<div class="row">
+			<h1 class="big-4">Interactive Spatial Tool </h1>
+			<div class="underline"></div>
+		</div>
 
-   
+		<div id="map"></div>
+		<br>
 
-
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+	
+	
+	
+	
+<section class="ftco-section contact-section ftco-no-pb" id="contact-section">
      <div class="container">
     	<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -407,21 +446,6 @@
             <p>Below are the details to reach out to me!</p>
           </div>
         </div>
-		<!-- Spatial Map Section -->
-	<section class="ftco-section contact-section" id="map-section">
-  	 <div class="container">
-    	<div class="row justify-content-center mb-5">
-      	 <div class="col-md-8 heading-section text-center">
-          <h2 class="mb-4">Spatial Map Tool</h2>
-          <p>Explore the interactive map of Nepal below.</p>
-         </div>
-        </div>
-    <div id="mymap" style="height: 500px; border: 2px solid #ccc;"></div>
-  </div>
-</section>
-
-	
-
         <div class="row d-flex contact-info mb-5">
           <div class="col-md-6 col-lg-3 d-flex ftco-animate">
           	<div class="align-self-stretch box p-4 text-center">
@@ -516,73 +540,109 @@
   <script src="js/scrollax.min.js"></script>
   
   <script src="js/main.js"></script>
-    
-  </body>
-  <script>
-  // Initialize map
-  var map = L.map('mymap').setView([28.3949, 84.1240], 7);
 
-  // Base map layer
-  var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+  </body>
+<!-- Required JS libraries -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<script src="https://rawcdn.githack.com/makinacorpus/Leaflet.GeometryUtil/gh-pages/src/leaflet.geometryutil.js"></script>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<br>
+
+<script>
+  const map = L.map("map").setView([28.3949, 84.1240], 7);
+
+  // Basemaps
+  const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
   }).addTo(map);
 
-  // Additional basemap (satellite)
-  var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
-    'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles © Esri'
+  const satellite = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+    attribution: "Tiles © Esri"
   });
 
-  // Add Layer Control
-  var baseMaps = {
-    "OpenStreetMap": osm,
-    "Satellite": satellite
-  };
-  L.control.layers(baseMaps).addTo(map);
+  L.control.layers({ "Street": osm, "Satellite": satellite }).addTo(map);
 
-  // Add marker
-  var ktm = L.marker([27.7172, 85.3240]).bindPopup("<b>Kathmandu</b>");
-  ktm.addTo(map);
-
-  // Add GeoJSON data (Optional: replace with your real data)
-  var geojsonLayer = L.geoJSON(null, {
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup("District: " + feature.properties.name);
-    }
+  // Add Search Bar
+  L.Control.geocoder({
+    defaultMarkGeocode: true
   }).addTo(map);
 
-  // Example GeoJSON (sample polygon)
-  var geojsonSample = {
-    "type": "FeatureCollection",
-    "features": [{
-      "type": "Feature",
-      "properties": {"name": "Example District"},
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[[84.0, 28.5], [84.5, 28.5], [84.5, 29.0], [84.0, 29.0], [84.0, 28.5]]]
-      }
-    }]
-  };
-  geojsonLayer.addData(geojsonSample);
-
-  // Add Drawing Controls
-  var drawnItems = new L.FeatureGroup();
+  // Draw tool setup
+  const drawnItems = new L.FeatureGroup();
   map.addLayer(drawnItems);
-  var drawControl = new L.Control.Draw({
+
+  const drawControl = new L.Control.Draw({
+    position: "topleft",
+    draw: {
+      polygon: true,
+      polyline: true,
+      rectangle: true,
+      circle: true,
+      marker: true
+    },
     edit: {
       featureGroup: drawnItems
     }
   });
   map.addControl(drawControl);
 
+  // Drawing logic
   map.on(L.Draw.Event.CREATED, function (event) {
-    var layer = event.layer;
+    const layer = event.layer;
+    const type = event.layerType;
+    let popupText = '';
+
+    if (type === 'marker') {
+      const { lat, lng } = layer.getLatLng();
+      popupText = `Coordinates: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+    } else if (type === 'circle') {
+      popupText = `Radius: ${layer.getRadius().toFixed(2)} m`;
+    } else if (type === 'polygon' || type === 'rectangle') {
+      const area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+      popupText = `Area: ${(area / 1000000).toFixed(3)} km²`;
+
+      // Buffer
+      const geojson = layer.toGeoJSON();
+      const buffered = turf.buffer(geojson, 1, { units: 'kilometers' });
+      const bufferLayer = L.geoJSON(buffered, {
+        style: { color: "red", weight: 1, fillOpacity: 0.2 }
+      });
+      bufferLayer.addTo(map);
+    } else if (type === 'polyline') {
+      const latlngs = layer.getLatLngs();
+      let total = 0;
+      for (let i = 0; i < latlngs.length - 1; i++) {
+        total += latlngs[i].distanceTo(latlngs[i + 1]);
+      }
+      popupText = `Length: ${(total / 1000).toFixed(2)} km`;
+    }
+
+    layer.bindPopup(popupText).openPopup();
     drawnItems.addLayer(layer);
   });
 
-  // Add Geocoder Search Bar
-  L.Control.geocoder().addTo(map);
+  // Show coordinates on click
+  map.on("click", function (e) {
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(`Lat: ${e.latlng.lat.toFixed(5)}<br>Lng: ${e.latlng.lng.toFixed(5)}`)
+      .openOn(map);
+  });
+
+  // Export as GeoJSON
+  function exportGeoJSON() {
+    const geojson = drawnItems.toGeoJSON();
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geojson));
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", "drawn_features.geojson");
+    dlAnchor.click();
+  }
 </script>
 
 
+
+  
 </html>
